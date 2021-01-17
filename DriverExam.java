@@ -8,8 +8,6 @@ public class DriverExam {
         Scanner sc = new Scanner(System.in);
         String[] correctAnswers = {"B", "D", "A", "A", "C", "A", "B", "A", "C", "D", "B","C", "D", "A", "D", "C", "C", "B", "D", "A"};
 
-        String [] s = new String[20];
-
         //instantiate array for student answers
         String[] studentAnswers = new String[20];
 
@@ -17,15 +15,32 @@ public class DriverExam {
         for(int i = 0; i<studentAnswers.length; i++)
         {
             System.out.print("What is your answer for question #" + (i+1) + ": ");
-            studentAnswers[i] = sc.nextLine();
+            studentAnswers[i] = sc.nextLine().toUpperCase();
         }
-        
+
         //correct answer counter
         int correct = totalCorrect(correctAnswers, studentAnswers);
 
         //incorrect answer counter
         int incorrect = totalIncorrect(correctAnswers, studentAnswers);
-        
+
+        //instantiation the missed question array
+        int[] missed = questionMissed(studentAnswers);
+
+        if(passsed(correct, incorrect))
+        {
+            System.out.println("You Passed");
+        }
+        else
+        {
+            System.out.println("You Failed");
+        }
+
+        System.out.println("Your score was: " + correct + "/" + (correct+incorrect));
+
+        System.out.println("You missed questions: ");
+
+        System.out.println(missed[0]);
     }
 
     public static int totalCorrect(String[] correctAnswers, String[] studentAnswers)
@@ -33,9 +48,9 @@ public class DriverExam {
         int correctCounter = 0;
         for(int i =0; i<correctAnswers.length; i++)
         {
-            if(correctAnswers[i]==studentAnswers[i])
+            if(correctAnswers[i].equals(studentAnswers[i]))
             {
-                correctCounter++;
+                correctCounter+=1;
             }
         }
 
@@ -47,7 +62,7 @@ public class DriverExam {
         int incorrectCounter = 0;
         for(int i =0; i<correctAnswers.length; i++)
         {
-            if(correctAnswers[i]!=studentAnswers[i])
+            if(!correctAnswers[i].equals(studentAnswers[i]))
             {
                 incorrectCounter++;
             }
@@ -55,7 +70,7 @@ public class DriverExam {
         return incorrectCounter;
     }//end incorrect method
 
-    public staic Boolean passed(int correct, int incorrect)
+    public static boolean passsed(int correct, int incorrect)
     {
         if(correct>=15)
         {
@@ -75,7 +90,7 @@ public class DriverExam {
         {
             if(studentAnswers[i].equals(" "))
             {
-                missedCounter++;
+                missedCounter+=1;
             }
         }
 
@@ -90,6 +105,7 @@ public class DriverExam {
                 index++;
             }
         }
+        return questionsMissed;
     }
-    return questionsMissed;
+    
 }
