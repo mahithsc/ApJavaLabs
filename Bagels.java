@@ -5,6 +5,7 @@ public class Bagels
 {
     public static void main(String [] args)
     {
+        Scanner sc = new Scanner(System.in);
         final int NUM_DIGITS = 4;
         //this generates the number
         int[] randNumber = new int[NUM_DIGITS];
@@ -14,8 +15,21 @@ public class Bagels
         }
         
         introduction();
+
+
         int guesse = oneTurn();
         oneGame(guesse, randNumber, NUM_DIGITS);
+        System.out.println("Do you want to play again?");
+        String response = sc.nextLine();
+
+        while(response.contains("y")||response.contains("Y"))
+        {
+            oneTurn();
+            oneGame(guesse, randNumber, NUM_DIGITS);
+            System.out.println(" ");
+            System.out.println("Do you want to play again?");
+            response = sc.nextLine();
+        }
 
     }//end main
 
@@ -103,7 +117,7 @@ public class Bagels
         oneTurn();
         String statement = checkAnswers(guesse, randNumber, NUM_DIGITS);
         counter++;
-        while(!statement.equals("You got it right in")
+        while(!statement.equals("You got it right in"))
         {
             oneTurn();
             statement = checkAnswers(guesse, randNumber, NUM_DIGITS);
@@ -111,8 +125,7 @@ public class Bagels
         }
         statement = statement + " " + counter + " tries";
         System.out.println(statement);
-    }
-    
+    }  
 }//end class
 
 /*
