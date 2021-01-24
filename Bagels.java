@@ -13,8 +13,9 @@ public class Bagels
             randNumber[i] = (int)(Math.random()*9)+1;
         }
         
-        introduction(); 
-        
+        introduction();
+        int guesse = oneTurn();
+        oneGame(guesse, randNumber, NUM_DIGITS);
 
     }//end main
 
@@ -119,6 +120,4 @@ Revised Pseudocode:
 1. First things first write the intro
 2. Generate a number without any zeros
     - create an array that generates number 1-9 included in a for loop
-
-
 */
